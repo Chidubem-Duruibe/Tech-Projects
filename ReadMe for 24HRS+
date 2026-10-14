@@ -1,0 +1,103 @@
+24Hrs+ — Work and Study Break Planner
+
+Project Overview
+
+24Hrs+ is a time management application designed to help users organize work and study sessions around planned breaks. Built with Python and Tkinter, the application provides a graphical interface that connects a user’s planned session length with a corresponding break schedule.
+
+The idea behind 24Hrs+ is simple: effective time management should include time to recover. Students and professionals often spend extended periods working without considering when to pause. This project addresses that problem by providing structured break recommendations that make rest part of the plan.
+
+24Hrs+ aims to encourage more intentional work habits, support a healthier balance between productivity and well-being, and make planning a focused session easier.
+
+The Problem
+
+Long work and study sessions can be difficult to manage when there is no clear plan for taking breaks. Users may continue working until they feel tired, distracted, or overwhelmed, leaving little opportunity to reset before returning to their tasks.
+
+24Hrs+ was developed around several practical challenges:
+
+Remembering to include breaks when planning a session.
+
+Choosing a break schedule that fits the time available.
+
+Balancing sustained focus with opportunities to rest.
+
+Turning a general intention to “manage time better” into a specific plan.
+
+The application supports this planning process by translating session duration into a defined break recommendation.
+
+How It Works
+
+The user selects a planned work or study duration through the graphical interface. The application applies a set of scheduling rules to identify the corresponding break pattern.
+
+Session Length
+
+Break Recommendation
+
+1 hour
+
+One 10-minute break
+
+2 hours
+
+A 10-minute break each hour
+
+3 hours
+
+A 15-minute break after 90 minutes
+
+4 or more hours
+
+A 15-minute break every 60 minutes
+
+These schedules represent the application’s planning rules rather than personalized medical or productivity recommendations. They provide users with a consistent starting point for organizing their time.
+
+For example, a student planning a three-hour study session can use the application’s recommendation to divide that session around a 15-minute break after 90 minutes. This creates a clear checkpoint for stepping away and returning to the remaining work.
+
+Core Features
+
+Duration-Based Break Planning
+
+24Hrs+ connects different session lengths with specific break schedules. This allows the application to provide recommendations that reflect the amount of time a user intends to spend working.
+
+Graphical User Interface
+
+The Python version uses Tkinter to provide a desktop interface. Users can interact with the application visually instead of entering commands in a terminal.
+
+Rule-Based Scheduling Logic
+
+The application uses conditional logic to map session durations to break recommendations. This demonstrates how defined requirements can be translated into application behavior.
+
+Work and Study Applications
+
+The project is intended for situations such as completing assignments, reviewing course material, coding, or working on longer projects. Its central purpose is to help users plan these activities with breaks included.
+
+Technologies Used
+
+Python: Implements the application logic and duration-based scheduling rules.
+
+Tkinter: Provides the graphical interface and interactive desktop components.
+
+The project also explored the 24Hrs+ concept through Mendix, connecting low-code prototyping with the development of a Python desktop application.
+
+Development Approach
+
+Developing 24Hrs+ involved turning a common time management challenge into a practical software concept. The process included identifying the user’s needs, defining break schedules, designing the interface, and connecting user selections to the appropriate application logic.
+
+The project provided experience in:
+
+Translating user needs into functional requirements.
+
+Building a graphical application with Python.
+
+Using conditional logic to implement scheduling rules.
+
+Connecting interface interactions with application behavior.
+
+Presenting recommendations in a clear, usable format.
+
+Future Improvements
+
+Potential enhancements include a countdown timer, break notifications, customizable schedules, and session history. These additions could expand 24Hrs+ from a break planning application into a tool that also helps users follow and review their planned sessions.
+
+Project Goal
+
+24Hrs+ explores how a straightforward software application can support better daily habits. By making breaks a visible part of work and study planning, the project encourages users to approach their time with greater structure and intention.
