@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Technology Association</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pcb:#0E2A1F;
+    --pcb-deep:#0A1F17;
+    --ivory:#F3EFE4;
+    --ink:#1B2420;
+    --brass:#C9A227;
+    --copper:#A65E2E;
+    --signal:#4FD1A5;
+    --line: rgba(243,239,228,0.14);
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--pcb);
+    color:var(--ivory);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(14,42,31,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-weight:700; letter-spacing:0.02em; font-size:15px;
+    text-decoration:none;
+  }
+  .brand .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--signal);
+    box-shadow:0 0 8px var(--signal);
+  }
+  .navlinks{display:flex; gap:36px; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;}
+  .navlinks a{text-decoration:none; opacity:0.75; transition:opacity .2s;}
+  .navlinks a:hover{opacity:1;}
+  .navlinks a:focus-visible, .brand:focus-visible, .btn:focus-visible{outline:2px solid var(--signal); outline-offset:3px;}
+  .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--ivory); width:40px; height:40px; border-radius:6px; cursor:pointer;}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--brass); color:var(--pcb-deep);
+    padding:11px 20px; border-radius:3px;
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:13px;
+    text-decoration:none; letter-spacing:0.03em;
+    border:1px solid var(--brass);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .btn:hover{ background:#dab434; transform:translateY(-1px); }
+  .btn.ghost{background:transparent; color:var(--ivory); border:1px solid var(--line);}
+  .btn.ghost:hover{border-color:var(--signal); color:var(--signal); background:transparent;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:110px 0 90px;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap:50px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--signal); margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--signal);}
+  h1.title{
+    font-size:clamp(38px, 5.2vw, 64px);
+    line-height:1.04; font-weight:700; margin:0 0 22px;
+    letter-spacing:-0.01em;
+  }
+  h1.title .accent{color:var(--brass);}
+  .lede{
+    font-size:18px; line-height:1.6; color:rgba(243,239,228,0.78);
+    max-width:46ch; margin:0 0 34px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .hero-stats{
+    display:flex; gap:0; margin-top:48px; border-top:1px solid var(--line);
+  }
+  .stat{flex:1; padding:18px 20px 0 0; border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{display:block; font-family:'IBM Plex Mono'; font-size:26px; color:var(--brass);}
+  .stat span{font-size:12px; color:rgba(243,239,228,0.6); letter-spacing:0.04em;}
+
+  /* signature trace-to-ledger graphic */
+  .trace-wrap{position:relative; aspect-ratio:1/1; max-width:480px; margin:0 auto;}
+  svg.trace{width:100%; height:100%; display:block;}
+  .trace-line{
+    fill:none; stroke:var(--signal); stroke-width:2;
+    stroke-dasharray: 900; stroke-dashoffset:900;
+    animation: draw 2.6s ease forwards .3s;
+  }
+  .trace-line.b{stroke:var(--copper); animation-delay:.6s;}
+  .ledger-line{
+    stroke:rgba(243,239,228,0.28); stroke-width:1;
+    opacity:0; animation: fadein 1s ease forwards 2.2s;
+  }
+  .node{fill:var(--brass); opacity:0; animation: fadein .5s ease forwards;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadein{to{opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    .trace-line, .ledger-line, .node{animation:none !important; stroke-dashoffset:0 !important; opacity:1 !important;}
+  }
+
+  /* ---------- SECTION divider ---------- */
+  .divider{
+    height:56px; width:100%;
+    background: repeating-linear-gradient(90deg, transparent 0 46px, var(--line) 46px 47px);
+    position:relative;
+  }
+  .divider::after{
+    content:""; position:absolute; left:0; top:50%; width:100%; height:1px;
+    background:var(--line);
+  }
+
+  section{padding:90px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin:0 0 14px; font-weight:700; letter-spacing:-0.01em;}
+  .section-head p{font-size:16px; color:rgba(243,239,228,0.72); line-height:1.65; margin:0;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns: repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .about-card{background:var(--pcb-deep); padding:32px;}
+  .about-card .idx{font-family:'IBM Plex Mono'; font-size:12px; color:var(--copper); letter-spacing:0.08em; margin-bottom:16px; display:block;}
+  .about-card h3{font-size:18px; margin:0 0 10px;}
+  .about-card p{font-size:14.5px; line-height:1.6; color:rgba(243,239,228,0.7); margin:0;}
+
+  /* ---------- BOARD ---------- */
+  .board{background:var(--ivory); color:var(--ink);}
+  .board .eyebrow{color:var(--copper);}
+  .board .eyebrow::before{background:var(--copper);}
+  .board .section-head p{color:rgba(27,36,32,0.68);}
+  .board-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .card{
+    background:var(--pcb-deep); border-radius:4px; overflow:hidden;
+    border:1px solid rgba(0,0,0,0.15);
+    position:relative;
+  }
+  .card-top{
+    padding:22px 22px 60px; position:relative;
+  }
+  .card-top::before{
+    content:""; position:absolute; top:16px; right:16px; width:26px; height:26px;
+    border-top:2px solid var(--signal); border-right:2px solid var(--signal);
+  }
+  .card-tag{font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--signal);}
+  .avatar{
+    width:56px; height:56px; border-radius:50%;
+    background:linear-gradient(135deg, var(--brass), var(--copper));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono'; font-weight:700; color:var(--pcb-deep); font-size:18px;
+    margin-top:18px;
+  }
+  .card-name{color:var(--ivory); font-size:19px; font-weight:600; margin:16px 0 2px;}
+  .card-role{color:var(--brass); font-size:13px; font-family:'IBM Plex Mono'; letter-spacing:0.03em;}
+  .card-bottom{
+    background:rgba(243,239,228,0.05); padding:16px 22px;
+    border-top:1px solid rgba(243,239,228,0.1);
+    font-size:13px; color:rgba(243,239,228,0.65);
+  }
+
+  /* ---------- EVENTS ---------- */
+  .events-list{border-top:1px solid var(--line);}
+  .event-row{
+    display:grid; grid-template-columns: 120px 1fr 160px 140px;
+    align-items:center; gap:24px;
+    padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  .event-date{font-family:'IBM Plex Mono'; color:var(--brass); font-size:14px;}
+  .event-date span{display:block; font-size:11px; color:rgba(243,239,228,0.5); letter-spacing:0.08em; margin-top:2px;}
+  .event-name{font-size:18px; font-weight:600;}
+  .event-name p{margin:6px 0 0; font-size:14px; color:rgba(243,239,228,0.65); font-weight:400;}
+  .event-type{font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--signal);}
+  .event-loc{font-size:13px; color:rgba(243,239,228,0.6); text-align:right;}
+
+  /* ---------- JOIN / CTA ---------- */
+  .cta-band{
+    background:var(--pcb-deep); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    text-align:center; padding:90px 0;
+  }
+  .cta-band h2{font-size:clamp(26px,4vw,42px); margin:0 0 18px;}
+  .cta-band p{color:rgba(243,239,228,0.7); font-size:16px; margin:0 0 32px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:48px 0;}
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
+  .foot-grid .brand{margin-bottom:8px;}
+  .foot-links{display:flex; gap:28px; font-size:13px;}
+  .foot-links a{text-decoration:none; opacity:0.7;}
+  .foot-links a:hover{opacity:1; color:var(--signal);}
+  .foot-note{font-size:12px; color:rgba(243,239,228,0.45); margin-top:28px;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  @media (max-width: 880px){
+    .hero-grid{grid-template-columns:1fr;}
+    .trace-wrap{max-width:320px;}
+    .about-grid{grid-template-columns:1fr;}
+    .board-grid{grid-template-columns:1fr 1fr;}
+    .event-row{grid-template-columns:1fr; gap:6px; text-align:left;}
+    .event-loc{text-align:left;}
+    .navlinks{display:none;}
+    .menu-btn{display:block;}
+  }
+  @media (max-width: 560px){
+    .board-grid{grid-template-columns:1fr;}
+    .hero-stats{flex-direction:column;}
+    .stat{border-right:none; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:14px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand"><span class="dot"></span> BTA <span style="opacity:.5; font-weight:400;">/ Business Technology Association</span></a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#board">Executive Board</a>
+      <a href="#events">Events</a>
+      <a href="#join">Join</a>
+    </div>
+    <a href="#join" class="btn ghost" style="display:none;" id="navCta">Join BTA</a>
+    <button class="menu-btn" aria-label="Menu">≡</button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Est. Chapter · Est. 20XX</div>
+      <h1 class="title">Where <span class="accent">business</span> meets the <span class="accent">circuit</span>.</h1>
+      <p class="lede">The Business Technology Association connects students who want to understand how technology moves markets — through workshops, company visits, and a network built by students who'll build tomorrow's companies.</p>
+      <div class="hero-ctas">
+        <a href="#join" class="btn">Become a Member</a>
+        <a href="#events" class="btn ghost">See Upcoming Events</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>120+</b><span>Active members</span></div>
+        <div class="stat"><b>18</b><span>Events per year</span></div>
+        <div class="stat"><b>6</b><span>Industry partners</span></div>
+      </div>
+    </div>
+    <div class="trace-wrap">
+      <svg class="trace" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <path class="trace-line" d="M40 60 H160 V140 H280 V60 H360" />
+        <path class="trace-line b" d="M40 200 H120 V280 H40" />
+        <circle class="node" cx="40" cy="60" r="5" style="animation-delay:.4s"/>
+        <circle class="node" cx="280" cy="60" r="5" style="animation-delay:1.1s"/>
+        <circle class="node" cx="360" cy="60" r="5" style="animation-delay:1.6s"/>
+        <circle class="node" cx="40" cy="200" r="5" style="animation-delay:.7s"/>
+        <circle class="node" cx="40" cy="280" r="5" style="animation-delay:1.3s"/>
+        <line class="ledger-line" x1="20" y1="330" x2="380" y2="330"/>
+        <line class="ledger-line" x1="20" y1="350" x2="380" y2="350"/>
+        <line class="ledger-line" x1="20" y1="370" x2="380" y2="370"/>
+        <line class="ledger-line" x1="120" y1="315" x2="120" y2="385"/>
+        <line class="ledger-line" x1="240" y1="315" x2="240" y2="385"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who we are</div>
+      <h2>Fluent in balance sheets and back-ends.</h2>
+      <p>BTA exists for students who don't want to choose between the boardroom and the terminal. We build the skills, connections, and hands-on experience that sit at the intersection of both.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card reveal">
+        <span class="idx">01 / MISSION</span>
+        <h3>Bridge two worlds</h3>
+        <p>We help members build fluency in both business strategy and the technical tools that now run every industry — from finance to product to operations.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="idx">02 / COMMUNITY</span>
+        <h3>A network that lasts</h3>
+        <p>Small enough that everyone's known by name, big enough to open doors — our members support each other well past graduation.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="idx">03 / EXPERIENCE</span>
+        <h3>Learn by doing</h3>
+        <p>Case competitions, live client projects, and technical workshops replace lecture slides with real, resume-ready work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="board" class="board">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Leadership</div>
+      <h2>Executive board</h2>
+      <p>The six students steering BTA this year. Reach out to any of them directly with questions about membership, events, or partnerships.</p>
+    </div>
+    <div class="board-grid">
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">President</div>
+          <div class="avatar">JD</div>
+          <div class="card-name">Jordan Diaz</div>
+          <div class="card-role">Business Analytics · '27</div>
+        </div>
+        <div class="card-bottom">Sets chapter direction, runs exec meetings, main point of contact for partnerships.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">Vice President</div>
+          <div class="avatar">SR</div>
+          <div class="card-name">Sam Rivera</div>
+          <div class="card-role">Information Systems · '27</div>
+        </div>
+        <div class="card-bottom">Oversees committees and steps in on chapter operations and planning.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">Treasurer</div>
+          <div class="avatar">AK</div>
+          <div class="card-name">Alex Kim</div>
+          <div class="card-role">Finance · '26</div>
+        </div>
+        <div class="card-bottom">Manages budget, dues, and sponsorship funds.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">Secretary</div>
+          <div class="avatar">MP</div>
+          <div class="card-name">Morgan Patel</div>
+          <div class="card-role">Management Info Systems · '28</div>
+        </div>
+        <div class="card-bottom">Keeps meeting notes, member records, and internal communication running.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">VP of Events</div>
+          <div class="avatar">TC</div>
+          <div class="card-name">Taylor Chen</div>
+          <div class="card-role">Marketing · '27</div>
+        </div>
+        <div class="card-bottom">Plans and runs socials, workshops, and the semesterly case competition.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-top">
+          <div class="card-tag">VP of Corporate Relations</div>
+          <div class="avatar">RN</div>
+          <div class="card-name">Riley Nguyen</div>
+          <div class="card-role">Supply Chain Mgmt · '26</div>
+        </div>
+        <div class="card-bottom">Builds relationships with sponsor companies and lines up speakers.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="events">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Calendar</div>
+      <h2>What we run</h2>
+      <p>A mix of technical workshops, employer nights, and social events — every member gets access to all of it.</p>
+    </div>
+    <div class="events-list">
+
+      <div class="event-row reveal">
+        <div class="event-date">AUG 28<span>MON · 6:00 PM</span></div>
+        <div class="event-name">General Body Kickoff<p>Meet the board, hear the semester plan, free food.</p></div>
+        <div class="event-type">Social</div>
+        <div class="event-loc">Student Union 214</div>
+      </div>
+
+      <div class="event-row reveal">
+        <div class="event-date">SEP 12<span>FRI · 4:00 PM</span></div>
+        <div class="event-name">Intro to SQL for Business<p>Hands-on workshop building queries analysts use daily.</p></div>
+        <div class="event-type">Workshop</div>
+        <div class="event-loc">Business Bldg, Rm 110</div>
+      </div>
+
+      <div class="event-row reveal">
+        <div class="event-date">SEP 26<span>FRI · 5:30 PM</span></div>
+        <div class="event-name">Employer Night: FinTech Panel<p>Recruiters and alumni talk hiring paths in tech-driven finance.</p></div>
+        <div class="event-type">Networking</div>
+        <div class="event-loc">Innovation Hall</div>
+      </div>
+
+      <div class="event-row reveal">
+        <div class="event-date">OCT 17–18<span>SAT–SUN</span></div>
+        <div class="event-name">Fall Case Competition<p>Teams pitch a tech strategy solution to a live business problem.</p></div>
+        <div class="event-type">Competition</div>
+        <div class="event-loc">Main Auditorium</div>
+      </div>
+
+      <div class="event-row reveal">
+        <div class="event-date">NOV 07<span>FRI · 3:00 PM</span></div>
+        <div class="event-name">Resume & LinkedIn Clinic<p>1:1 reviews with upperclassmen and alumni mentors.</p></div>
+        <div class="event-type">Workshop</div>
+        <div class="event-loc">Career Center</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="join">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Membership</div>
+    <h2>Ready to plug in?</h2>
+    <p>Open to all majors — no coding or finance background required, just curiosity about both.</p>
+    <a href="mailto:bta@youruniversity.edu" class="btn">Email us to join</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand"><span class="dot"></span> BTA</div>
+      <div class="foot-note" style="margin-top:4px;">Business Technology Association<br>[Your University Name]</div>
+    </div>
+    <div class="foot-links">
+      <a href="mailto:bta@youruniversity.edu">bta@youruniversity.edu</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="wrap foot-note">© 2026 Business Technology Association. All rights reserved.</div>
+</footer>
+
+<script>
+  // reveal-on-scroll
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
