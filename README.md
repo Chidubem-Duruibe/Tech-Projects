@@ -62,7 +62,7 @@ I am continuing to expand this portfolio through additional cybersecurity labs, 
 ---
 
 ## 🔗 Project Links
-- **Business Technology Association Live Website: file:///C:/Users/Ikedu/Downloads/bta-website%20(2).html#top
+- **Business Technology Association Live Website**:
 - **24Hrs+:** Source Code in File
 - **HMI Telehealth Demo:** https://ai.studio/apps/6921a4a0-b430-4eb8-ab46-018c9ffa95cd
 - **LinkedIn:**www.linkedin.com/in/chidubem-duruibe
