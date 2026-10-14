@@ -4,17 +4,17 @@ A collection of technical projects showcasing my experience in application devel
 
 ## Projects
 
-[BTA Website: Business Technology Association, Kennesaw State University]
+###  [BTA Website: Business Technology Association, Kennesaw State University]
 
 A responsive website built for the Business Technology Association (BTA), a student organization at Kennesaw State University that connects students interested in the intersection of business and technology. The project was designed to give the organization a central, professional place to share who it is, introduce its leadership, and keep members informed about upcoming events, replacing scattered posts and word of mouth with a single, easy-to-update site.
 
 The site includes a branded landing page with an animated circuit-to-ledger graphic, an organization overview, an executive board section with photo profile cards, and an interactive events calendar that automatically marks events as upcoming or past.
 
-Stack: HTML5, CSS3, JavaScript, Google Fonts (IBM Plex)
-Focus: Web Development, UI/UX Design, Branding, Front-End Development
-Features: Custom navy, yellow, and white brand theme, animated hero graphic, executive board profile cards with photos, month-by-month interactive events calendar with automatic Upcoming/Past status, mobile-friendly navigation, and links to the organization’s email, Instagram, and LinkedIn
-Skills: Front-end development, responsive design, UI/UX design, brand-driven visual design, date-driven component logic in vanilla JavaScript, accessibility (keyboard focus states and reduced-motion support), image processing and optimization, and working with organization leadership to gather and implement content
-Project Type: Organization / Web Development Project
+**Stack**: HTML5, CSS3, JavaScript, Google Fonts (IBM Plex)
+**Focus**: Web Development, UI/UX Design, Branding, Front-End Development
+**Features**: Custom navy, yellow, and white brand theme, animated hero graphic, executive board profile cards with photos, month-by-month interactive events calendar with automatic Upcoming/Past status, mobile-friendly navigation, and links to the organization’s email, Instagram, and LinkedIn
+**Skills**: Front-end development, responsive design, UI/UX design, brand-driven visual design, date-driven component logic in vanilla JavaScript, accessibility (keyboard focus states and reduced-motion support), image processing and optimization, and working with organization leadership to gather and implement content
+**Project Type**: Organization / Web Development Project
 
 ### 🕐 [24Hrs+ — Productivity & Wellness Application]
 
