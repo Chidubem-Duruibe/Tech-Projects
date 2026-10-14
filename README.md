@@ -23,7 +23,7 @@ The application includes patient and provider dashboards, an interactive body-pa
 - **Stack:** React, TypeScript, D3.js, TopoJSON, HTML/CSS, Google AI Studio
 - **Focus:** Healthcare Technology, Application Development, Data Visualization, User Experience
 - **Features:** Patient/doctor dashboards, interactive SVG body map, 3D geographic visualization, provider selection, and drone delivery tracking
-- **Skills:** Frontend development, UI/UX design, interactive data visualization, API/technology integration, teamwork, and problem-solving
+- Skills: Frontend development, UI/UX design, interactive data visualization, API/technology integration, teamwork, and problem-solving
 - **Project Type:** Hackathon / Team Project
 
 ---
@@ -51,8 +51,7 @@ I am continuing to expand this portfolio through additional cybersecurity labs, 
 
 ## 🔗 Project Links
 
-- **24Hrs+:** 
-- **HMI Telehealth:** 
+- **24Hrs+: Source Code in Section** 
 - **HMI Telehealth Demo:** https://ai.studio/apps/6921a4a0-b430-4eb8-ab46-018c9ffa95cd
 - **LinkedIn:**www.linkedin.com/in/chidubem-duruibe
 
